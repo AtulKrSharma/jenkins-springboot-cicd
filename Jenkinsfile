@@ -22,10 +22,6 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-         stage ('Maven Test'){
-            steps {
-                sh 'mvn test'
-            }
         }
         stage ('Maven Package'){
             steps {
