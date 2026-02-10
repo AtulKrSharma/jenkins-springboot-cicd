@@ -101,7 +101,7 @@ pipeline {
               }
             }
         }
-          stage("Deploy To Kubernetes") {
+          stage("Deploy To K8s") {
             steps {
               script {
                 sh 'aws eks update-kubeconfig --region us-east-1 --name eksdemo2'
