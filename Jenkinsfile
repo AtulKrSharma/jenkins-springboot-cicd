@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout From Git') {
             steps {
-                git branch:'prod' , url: "https://github.com/bkrrajmali/aws-jenkins-springboot.git"
+                git branch:'main' , url: "https://github.com/AtulKrSharma/jenkins-springboot-cicd.git"
             }
         }
         stage ('Maven Parallel Stages') {
