@@ -95,7 +95,7 @@ pipeline {
         stage("Push Docker Image to AWS ECR") {
             steps {
               script {
-                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 304182266883.dkr.ecr.us-east-1.amazonaws.com'
+                sh '(Get-ECRLoginCommand).Password | docker login --username AWS --password-stdin 304182266883.dkr.ecr.us-east-1.amazonaws.com'
                 sh 'docker tag springboot:latest 304182266883.dkr.ecr.us-east-1.amazonaws.com/springboot:latest'
                 sh 'docker push 304182266883.dkr.ecr.us-east-1.amazonaws.com/springboot:latest'
               }
