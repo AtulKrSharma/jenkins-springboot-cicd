@@ -92,15 +92,24 @@ pipeline {
               }
             }
         }
-        stage("Push Docker Image to AWS ECR") {
-            steps {
-              script {
-                sh '(Get-ECRLoginCommand).Password | docker login --username AWS --password-stdin 304182266883.dkr.ecr.us-east-1.amazonaws.com'
-                sh 'docker tag springboot:latest 304182266883.dkr.ecr.us-east-1.amazonaws.com/springboot:latest'
-                sh 'docker push 304182266883.dkr.ecr.us-east-1.amazonaws.com/springboot:latest'
-              }
-            }
+ stage("Push Docker Image to AWS ECR") {
+    steps {
+        script {
+            // Login to AWS ECR
+            sh '''
+                /usr/local/bin/aws ecr get-login-password --region us-east-1 \
+                | docker login --username AWS --password-stdin 304182266883.dkr.ecr.us-east-1.amazonaws.com
+            '''
+            
+            // Tag Docker image
+            sh 'docker tag springboot:latest 304182266883.dkr.ecr.us-east-1.amazonaws.com/springboot:latest'
+            
+            // Push Docker image
+            sh 'docker push 304182266883.dkr.ecr.us-east-1.amazonaws.com/springboot:latest'
         }
+    }
+}
+
           stage("Deploy To K8s") {
             steps {
               script {
