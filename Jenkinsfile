@@ -66,7 +66,7 @@ pipeline {
                          def uploadSpec = """{
                               "files": [
                                 {
-                                  "pattern": "target/springbootApp.jar",
+                                  "pattern": "target/petclinic.war",
                                   "target": "demomaven-libs-release",
                                   "flat": "false",
                                   "props" : "${properties}",
