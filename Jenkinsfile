@@ -34,22 +34,22 @@ pipeline {
           }
          }
        }
-    stage('Sonar Analysis') {
-    steps {
-        script {
-            def scannerHome = tool 'sonar-scanner'
-            withSonarQubeEnv('sonarserver') {
-                sh """
-                ${scannerHome}/bin/sonar-scanner \
-                -Dsonar.organization=bkrrajmali \
-                -Dsonar.projectName=SpringBootPet \
-                -Dsonar.projectKey=bkrrajmali_springbootpet \
-                -Dsonar.java.binaries=target
-                """
-                        }
-                    }
-                }
-            }
+    // stage('Sonar Analysis') {
+    // steps {
+    //     script {
+    //         def scannerHome = tool 'sonar-scanner'
+    //         withSonarQubeEnv('sonarserver') {
+    //             sh """
+    //             ${scannerHome}/bin/sonar-scanner \
+    //             -Dsonar.organization=bkrrajmali \
+    //             -Dsonar.projectName=SpringBootPet \
+    //             -Dsonar.projectKey=bkrrajmali_springbootpet \
+    //             -Dsonar.java.binaries=target
+    //             """
+    //                     }
+    //                 }
+    //             }
+    //         }
     // stage("Quality Gate") {
     //         steps {
     //           timeout(time: 1, unit: 'MINUTES') {
