@@ -4,11 +4,6 @@ pipeline {
     tools{
         maven 'maven'
     }
-
-    environment {
-        CLUSTER_NAME = "eks-atul-demo"  
-        REGION = "us-east-1"
-    }
     
     stages {
         stage('Checkout From Git') {
@@ -142,13 +137,13 @@ pipeline {
 //             }
 //         }
 
-        stage("Deploy To K8s") {
+     stage("Deploy To Kubernetes") {
             steps {
-                script {
-                    sh "aws eks update-kubeconfig --region ${REGION} --name ${CLUSTER_NAME}"
-                    sh 'kubectl apply -f k8s/springboot-deployment.yaml'
-                }
+              script {
+                sh 'aws eks update-kubeconfig --region us-east-1 --name eks-atul-demo'
+                sh 'kubectl apply -f k8s/sprinboot-deployment.yaml'
+              }
             }
         }
+      }
     }
-}
