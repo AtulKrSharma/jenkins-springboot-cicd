@@ -141,7 +141,7 @@ pipeline {
             steps {
               script {
                 sh 'aws eks update-kubeconfig --region us-east-1 --name eks-atul-demo'
-                sh 'kubectl apply -f k8s/sprinboot-deployment.yaml'
+                sh 'kubectl apply -f k8s/springboot-deployment.yaml'
               }
             }
         }
