@@ -110,6 +110,33 @@ pipeline {
     }
 }
 
+    stage("Create EKS Cluster") {
+    steps {
+        script {
+            timeout(time: 30, unit: 'MINUTES') { // gives 30 minutes
+                def clusterExists = sh(
+                    script: "aws eks describe-cluster --region us-east-1 --name eksdemo || echo 'not-found'",
+                    returnStdout: true
+                ).trim()
+
+                if (clusterExists.contains('not-found')) {
+                    echo "Cluster does not exist. Creating cluster..."
+                    sh """
+                    eksctl create cluster \\
+                        --name eksdemo \\
+                        --region us-east-1 \\
+                        --nodes 2 \\
+                        --node-type t3.medium
+                    """
+                } else {
+                    echo "Cluster already exists. Skipping creation."
+                }
+            }
+        }
+    }
+
+
+
           stage("Deploy To K8s") {
             steps {
               script {
