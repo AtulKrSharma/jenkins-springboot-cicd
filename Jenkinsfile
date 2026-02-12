@@ -140,7 +140,7 @@ pipeline {
      stage("Deploy To Kubernetes") {
             steps {
               script {
-                sh 'aws eks update-kubeconfig --region us-east-1 --name eks-atul-demo'
+                sh 'aws eks update-kubeconfig --region us-east-1 --name atul-demo'
                 sh 'kubectl apply -f k8s/springboot-deployment.yaml'
               }
             }
